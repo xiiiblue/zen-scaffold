@@ -7,7 +7,6 @@ ZEN-SCAFFOLD - 一个基于Spring Boot的微服务脚手架
 - 使用SpringBoot系列框架
 - Maven构建，微服务各自独立，使用聚合而非继承
 - Git版本控制，遵循集团开发流程
-- 无本地数据库，复用CBSS数据库（Oracle）
 - 使用Spring MVC提供REST服务
 - 持久层框架使用Spring Data JPA/JDBC
 - 数据源默认使用HikariCP
