@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>Index</title>
+    <link rel="stylesheet" th:href="@{/css/index.css}"/>
+</head>
+<body>
+<span th:object="${session}"></span>
+<div class="menubox">
+    <div class="menuhead">
+        <h1>Zen Scaffold API</h1>
+    </div>
+    <ul>
+        <li><a th:href="@{/swagger-ui.html}">swagger-ui</a></li>
+        <li><a th:href="@{/v2/api-docs}">swagger-json</a></li>
+        <li><a th:href="@{/hystrix}">hystrix-dashboard</a></li>
+        <li><a th:href="@{/h2-console}">h2-console</a></li>
+        <li><a th:href="@{/beans}">actuator-beans</a></li>
+        <li><a th:href="@{/metrics}">actuator-metrics</a></li>
+        <li><a th:href="@{/configprops}">actuator-configprops</a></li>
+        <li><a th:href="@{/mappings}">actuator-mappings</a></li>
+        <li><a th:href="@{/autoconfig}">actuator-autoconfig</a></li>
+        <li><a th:href="@{/health}">actuator-health</a></li>
+        <li><a th:href="@{/dump}">actuator-dump</a></li>
+        <li><a th:href="@{/info}">actuator-info</a></li>
+        <li><a th:href="@{/trace}">actuator-trace</a></li>
+    </ul>
+</div>
+</body>
+</html>

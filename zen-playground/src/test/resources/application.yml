@@ -1,0 +1,47 @@
+spring.profiles.active: h2
+
+---
+
+# 默认
+spring:
+  jpa.properties.hibernate:
+    show_sql: true
+    format_sql: true
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 10000
+hystrix.threadpool.default:
+  coreSize: 200
+  maxQueueSize: 300
+  queueSizeRejectionThreshold: 20
+feign.hystrix.enabled: true
+marathon-lb-internal.ribbon.listOfServers: marathon-lb-internal.marathon.mesos
+custom:
+  baseurl: @baseurl@
+  title: @name@
+  description: @description@
+  version: @version@
+
+---
+
+# 内嵌H2
+spring:
+  profiles: h2
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;INIT=CREATE SCHEMA IF NOT EXISTS UCR_CEN1
+    username: sa
+  jpa.properties.hibernate.dialect: org.hibernate.dialect.H2Dialect
+  jpa.hibernate.ddl-auto: create-drop
+
+---
+
+# 开发环境
+spring:
+  profiles: dev
+  datasource:
+
+---
+
+# 本机MySQL
+spring:
+  profiles: local
+  datasource:

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+    <Target>System.out</Target>
+    <encoder>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="file_info" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <File>/opt/logs/busi/@artifactId@-info.log</File>
+    <append>true</append>
+    <encoder>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss} [%-5p]\(%-30c{0}\) [TxId : %X{PtxId} , SpanId : %X{PspanId}] [ET:%X{ENV_TYPE},AN:%X{APP_NAME},SN:%X{SERVICE_NAME},CN:%X{CONTAINER_NAME},CI:%X{CONTAINER_IP}] %m%n</pattern>
+    </encoder>
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+      <level>INFO</level>
+    </filter>
+    <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+      <maxIndex>10</maxIndex>
+      <FileNamePattern>/opt/logs/busi/@artifactId@-info.log.%i</FileNamePattern>
+    </rollingPolicy>
+    <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+      <MaxFileSize>100MB</MaxFileSize>
+    </triggeringPolicy>
+  </appender>
+
+  <appender name="file_error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <append>true</append>
+    <File>/opt/logs/busi/@artifactId@-error.log</File>
+    <encoder>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss} [%-5p]\(%-30c{0}\) [TxId : %X{PtxId} , SpanId : %X{PspanId}] [ET:%X{ENV_TYPE},AN:%X{APP_NAME},SN:%X{SERVICE_NAME},CN:%X{CONTAINER_NAME},CI:%X{CONTAINER_IP}] %m%n</pattern>
+    </encoder>
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+      <level>ERROR</level>
+    </filter>
+    <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+      <maxIndex>10</maxIndex>
+      <FileNamePattern>/opt/logs/busi/@artifactId@-error.log.%i</FileNamePattern>
+    </rollingPolicy>
+    <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+      <MaxFileSize>100MB</MaxFileSize>
+    </triggeringPolicy>
+  </appender>
+
+  <logger name="org.hibernate.type" additivity="false" level="trace">
+    <appender-ref ref="stdout"/>
+  </logger>
+  <logger name="org.springframework.cache" additivity="false" level="trace">
+    <appender-ref ref="stdout"/>
+  </logger>
+  <logger name="com.bluexiii.zenscaffold.client" additivity="false" level="debug">
+    <appender-ref ref="stdout"/>
+  </logger>
+
+  <root level="info">
+    <appender-ref ref="file_info"/>
+    <appender-ref ref="file_error"/>
+    <appender-ref ref="stdout"/>
+  </root>
+</configuration>
